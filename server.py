@@ -106,6 +106,7 @@ def health():
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("CHK_PORT", 5002))
+    # Use platform-provided PORT (Botkeep sets this) or SERVER_PORT, then fallback to CHK_PORT or 5002
+    port = int(os.environ.get("PORT") or os.environ.get("SERVER_PORT") or os.environ.get("CHK_PORT") or 5002)
     print(f"[CHK] Shopify checker API starting on port {port}", flush=True)
     app.run(host="0.0.0.0", port=port, threaded=True)
